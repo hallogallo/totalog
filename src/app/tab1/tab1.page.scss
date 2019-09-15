@@ -2,3 +2,20 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+ion-input {
+  background: #cccccc
+}
+
+label#rounded{border-radius:15px; }
+
+div#container{width: 300px; margin-left:auto; margin-right: auto; }
+
+input {
+  border-radius: 30px;
+  border-spacing: 3px;
+  border-style: solid;
+  border-color: #aaaaaa;
+  padding: 10px;
+  background-color: #eeeeee
+}
