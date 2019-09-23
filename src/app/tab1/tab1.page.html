@@ -7,10 +7,95 @@
 </ion-header>
 
 <ion-content>
-  <p>
-    <input type="text" placeholder="Test">
-  </p>
-  
-  <ion-button color="primary">Add QSO</ion-button>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>
+              <input type="text" size="15" placeholder="Call">
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <ion-select placeholder="Band">
+                <ion-select-option value="2m">2m</ion-select-option>
+                <ion-select-option value="70cm">70cm</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div>
+              <input type="text" size="15" placeholder="RST TX">
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <input type="text" size="15" placeholder="RST RX">
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div>
+              <input type="text" size="15" placeholder="Ex TX">
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <input type="text" size="15" placeholder="Ex RX">
+            </div>
+          </ion-col>
+        </ion-row>
+        <br />
+        <ion-button color="primary" expand="block">Add QSO</ion-button>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>
+      Recent QSOs
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>
+        <h2>12:27 &nbsp; <strong>DF4NEN</strong> </h2>
+      </ion-label>
+      <ion-button color="success" shape="round">edit</ion-button>
+      <ion-button color="danger" shape="round">delete</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>12:19 &nbsp; <strong>DK0TU</strong> </h2>
+      </ion-label>
+      <ion-button color="success" shape="round">edit</ion-button>
+      <ion-button color="danger" shape="round">delete</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>12:16 &nbsp; <strong>DM7MD</strong> </h2>
+      </ion-label>
+      <ion-button color="success" shape="round">edit</ion-button>
+      <ion-button color="danger" shape="round">delete</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>12:10 &nbsp; <strong>DL7BST</strong> </h2>
+      </ion-label>
+      <ion-button color="success" shape="round">edit</ion-button>
+      <ion-button color="danger" shape="round">delete</ion-button>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>
