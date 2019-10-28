@@ -6,71 +6,70 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-card>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>
+            <input [(ngModel)]="form.call" type="text" size="15" placeholder="Call">
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-select [(ngModel)]="form.band" placeholder="Band">
+              <ion-select-option value="2m">2m</ion-select-option>
+              <ion-select-option value="70cm">70cm</ion-select-option>
+            </ion-select>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <div>
+            <input [(ngModel)]="form.rstGiven" type="text" size="15" placeholder="RST TX">
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <input [(ngModel)]="form.rstReceived" type="text" size="15" placeholder="RST RX">
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <div>
+            <input [(ngModel)]="form.exchangeGiven" type="text" size="15" placeholder="Ex TX">
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <input [(ngModel)]="form.exchangeReceived" type="text" size="15" placeholder="Ex RX">
+          </div>
+        </ion-col>
+      </ion-row>
+      <br />
+      <ion-button color="primary" expand="block" (click)="updateMyValue()">Add QSO</ion-button>
+
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
 <ion-content>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <div>
-              <input [(ngModel)]="form.call" type="text" size="15" placeholder="Call">
-            </div>
-          </ion-col>
-          <ion-col>
-            <div>
-              <ion-select [(ngModel)]="form.band" placeholder="Band">
-                <ion-select-option value="2m">2m</ion-select-option>
-                <ion-select-option value="70cm">70cm</ion-select-option>
-              </ion-select>
-            </div>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <div>
-              <input [(ngModel)]="form.rstGiven" type="text" size="15" placeholder="RST TX">
-            </div>
-          </ion-col>
-          <ion-col>
-            <div>
-              <input [(ngModel)]="form.rstReceived" type="text" size="15" placeholder="RST RX">
-            </div>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <div>
-              <input [(ngModel)]="form.exchangeGiven" type="text" size="15" placeholder="Ex TX">
-            </div>
-          </ion-col>
-          <ion-col>
-            <div>
-              <input [(ngModel)]="form.exchangeReceived" type="text" size="15" placeholder="Ex RX">
-            </div>
-          </ion-col>
-        </ion-row>
-        <br />
-        <ion-button color="primary" expand="block" (click)="updateMyValue()" >Add QSO</ion-button>
-
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-
   <ion-list>
-      <ion-list-header>
-          Recent QSOs
-        </ion-list-header>
- 
-      <ion-item *ngFor="let qso of qsos; let i = index">
-        <ion-label>
-            <h2>{{qso.time}} &nbsp; <strong>{{qso.call}}</strong> </h2>
-        </ion-label>
-        <ion-button color="success" shape="round">edit</ion-button>
-        <ion-button (click)="qsos.splice(i , 1)" color="danger" shape="round">delete</ion-button>
-      </ion-item>
-  </ion-list>
+    <ion-list-header>
+      Recent QSOs
+    </ion-list-header>
 
+    <ion-item *ngFor="let qso of qsos; let i = index">
+      <ion-label>
+        <h2>{{qso.time}} &nbsp; <strong>{{qso.call}}</strong> </h2>
+      </ion-label>
+      <ion-button color="success" shape="round">edit</ion-button>
+      <ion-button (click)="qsos.splice(i , 1)" color="danger" shape="round">delete</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
