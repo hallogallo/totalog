@@ -1,8 +1,26 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Log
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-align-self-start">
+            <div>
+              Log
+            </div>
+          </ion-col>
+
+          <ion-col class="ion-align-self-end" class="ion-text-end">
+            <ion-button size="small" shape="round" color="tertiary" style="padding: 0px; margin: 0px;">save</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+
+
     </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -51,7 +69,7 @@
         </ion-col>
       </ion-row>
       <br />
-      <ion-button color="primary" expand="block" (click)="updateMyValue()">Add QSO</ion-button>
+      <ion-button color="warning" expand="block" (click)="updateMyValue()">Add QSO</ion-button>
 
     </ion-grid>
   </ion-card-content>
@@ -73,10 +91,10 @@
     </ion-item>
   </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button color="secondary" style="margin: 10px;">
-        <ion-icon name="save"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+<!--   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" style="margin: 10px;">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
 
 </ion-content>
