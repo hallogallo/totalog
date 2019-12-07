@@ -45,7 +45,7 @@ export class Tab1Page {
   }
 
   updateMyValue() {
-    
+
     let now = new Date();
     let newQso = Object.assign({}, this.form); // copy content of object, don't link object itself!
     newQso.time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
@@ -55,7 +55,7 @@ export class Tab1Page {
 
   }
 
-  deleteMyValue(index: int) {
+  deleteMyValue(index) {
    
     this.qsos.splice(index , 1);
     this.storage.set('qsos', this.qsos);
