@@ -16,7 +16,19 @@ export class Tab1Page {
     let that = this;
     
     this.storage.get('qsos').then(function (value) {
-      that.qsos = value;
+
+      if ((value != null) && (value != undefined)) {
+
+        that.qsos = value;
+
+      } else {
+
+        that.qsos = [];
+      }
+      
+    }).catch((error) => {
+      console.log(error);
+      that.qsos = [];
     });
 
   }
