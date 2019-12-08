@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab3',
@@ -9,12 +10,37 @@ export class Tab3Page implements OnInit {
 
   darktoggle: any;
   darkmode: boolean;
+  darkModeToggle: boolean;
+  settingsStorage: Storage;
 
-  constructor() {
+  constructor(private storage: Storage) {
 
-    //this.darktoggle = document.querySelector('#themeToggle');
-    //document.body.classList.add('dark');
+    this.settingsStorage = storage;
     this.darkmode = false;
+    let that = this;
+
+    this.storage.get('darkmode').then(function (value) {
+
+      if ((value != null) && (value != undefined)) {
+
+        that.darkmode = value;
+
+        if(value == true) {
+          document.body.classList.add('dark');
+          that.darkModeToggle = true;
+        }
+
+        console.log(value);
+
+      } else {
+
+        that.darkmode = false;
+      }
+      
+    }).catch((error) => {
+      console.log(error);
+      that.darkmode = false;
+    });
 
   }
 
@@ -31,6 +57,7 @@ export class Tab3Page implements OnInit {
     }
 
     console.log(this.darkmode);
+    this.settingsStorage.set('darkmode' , this.darkmode);
 
   }
 

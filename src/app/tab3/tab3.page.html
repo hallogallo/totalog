@@ -10,10 +10,9 @@
         <ion-item lines="full">
           <ion-icon slot="start" name="moon"></ion-icon>
           <ion-label>
-            Toggle Dark Theme
+            Dark Theme
           </ion-label>
-          <!-- <ion-toggle [(ngModel)]="darkmode" (click)="toggleDarkMode()" slot="end"></> -->
-          <ion-toggle (click)="toggleDarkMode()" slot="end"></ion-toggle>
+          <ion-toggle [(ngModel)]="darkModeToggle" id="darkmodetoggle" (click)="toggleDarkMode()" slot="end"></ion-toggle>
         </ion-item>
       </ion-list>
 
