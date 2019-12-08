@@ -2,19 +2,3 @@
   max-height: 35vh;
   overflow: hidden;
 }
-
-
-input {
-  border-radius: 30px;
-  border-spacing: 3px;
-  // border-style: solid;
-  border-style: none;
-  border-color: #aaaaaa;
-  padding: 10px;
-  background-color: #eeeeee;
-}
-
-textarea:focus, input:focus{
-  outline: none;
-  border: solid 1px blue;
-}
