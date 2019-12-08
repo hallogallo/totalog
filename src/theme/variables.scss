@@ -74,6 +74,9 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** text input **/
+  --ion-input-color: #eeeeee;
 }
 
 /*input*/
@@ -86,7 +89,7 @@ input {
   border-color: #aaaaaa;
   padding: 10px;
   //background-color: #eeeeee;
-  background-color: var(--ion-background-color);
+  background-color:var(--ion-input-color);
 }
 
 textarea:focus, input:focus{
@@ -173,6 +176,7 @@ textarea:focus, input:focus{
 .ios body.dark {
   --ion-background-color: #000000;
   --ion-background-color-rgb: 0, 0, 0;
+  --ion-input-color: #000000;
 
   --ion-text-color: #ffffff;
   --ion-text-color-rgb: 255, 255, 255;
@@ -211,6 +215,7 @@ textarea:focus, input:focus{
 .md body.dark {
   --ion-background-color: #121212;
   --ion-background-color-rgb: 18, 18, 18;
+  --ion-input-color: #000000;
 
   --ion-text-color: #ffffff;
   --ion-text-color-rgb: 255, 255, 255;
