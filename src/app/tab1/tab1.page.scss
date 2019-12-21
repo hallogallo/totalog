@@ -7,7 +7,6 @@
 input {
   border-radius: 30px;
   border-spacing: 3px;
-  // border-style: solid;
   border-style: none;
   border-color: #aaaaaa;
   padding: 10px;
@@ -17,5 +16,5 @@ input {
 
 textarea:focus, input:focus{
   outline: none;
-  border: solid 1px blue;
+  border: solid 1px var(--ion-color-tertiary);
 }
