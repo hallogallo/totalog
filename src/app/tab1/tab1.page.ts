@@ -11,8 +11,8 @@ export class Tab1Page {
     band: '',
     time: '',
     call: '',
-    rstGiven: '',
-    rstReceived: '',
+    rstGiven: '59',
+    rstReceived: '59',
     exchangeGiven: '',
     exchangeReceived: ''
   }
