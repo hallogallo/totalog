@@ -81,7 +81,7 @@
       <ion-label>
         <h2>{{qso.time}} &nbsp; <strong>{{qso.call}}</strong> </h2>
       </ion-label>
-      <ion-button color="success" shape="round">edit</ion-button>
+      <ion-button (click)="showEditDialog()" color="success" shape="round">edit</ion-button>
       <ion-button (click)="qsos.splice(i , 1)" color="danger" shape="round">delete</ion-button>
     </ion-item>
   </ion-list>
