@@ -12,7 +12,7 @@ export class Tab1Page {
 
   qsos: Array<any>;
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, public alertControl: AlertController) {
 
     let that = this;
     
