@@ -54,6 +54,13 @@ export class Tab1Page {
 
   }
 
+  deleteMyValue(index: int) {
+   
+    this.qsos.splice(index , 1);
+    this.storage.set('qsos', this.qsos);
+
+  }
+
   async showEditDialog() {
     const alert = await this.alertControl.create({
       header: 'Edit QSO',
