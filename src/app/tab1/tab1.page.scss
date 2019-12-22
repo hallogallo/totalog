@@ -3,28 +3,23 @@
   overflow: hidden;
 }
 
+  input {
+    border-radius: 30px;
+    border-spacing: 3px;
+    border-style: none;
+    border-color: #aaaaaa;
+    padding: 10px;
+    background-color:var(--ion-input-color);
+    color: var(--ion-input-text-color);
+  }
 
-input {
-  border-radius: 30px;
-  border-spacing: 3px;
-  border-style: none;
-  border-color: #aaaaaa;
-  padding: 10px;
-  background-color: #eeeeee;
-  width: 97%;
-}
-
-  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #d1d1d1;
-    opacity: 1; /* Firefox */
-    font-style: italic;
+  textarea:focus, input:focus{
+    outline: none;
+    border: solid 1px var(--ion-color-tertiary);
   }
   
-/*   ::-ms-input-placeholder {  Microsoft Edge 
-    color: red;
-  } */
-
-textarea:focus, input:focus{
-  outline: none;
-  border: solid 1px var(--ion-color-tertiary);
-}
+  ::placeholder { // Chrome, Firefox, Opera, Safari 10.1+
+    color: var(--ion-placeholder-color);
+    opacity: 1; // Firefox
+    font-style: italic;
+  }
