@@ -14,11 +14,11 @@ export class Tab1Page {
 
   constructor(private storage: Storage, public alertControl: AlertController) {
 
-    let that = this;
-    
-    this.storage.get('qsos').then(function (value) {
+    const that = this;
 
-      if ((value != null) && (value != undefined)) {
+    this.storage.get('qsos').then( (value) => {
+
+      if ((value != null) && (value !== undefined)) {
 
         that.qsos = value;
 
@@ -26,7 +26,7 @@ export class Tab1Page {
 
         that.qsos = [];
       }
-      
+
     }).catch((error) => {
       console.log(error);
       that.qsos = [];
@@ -50,12 +50,12 @@ export class Tab1Page {
     const newQso = Object.assign({} , this.form); // copy content of object, don't link object itself!
     newQso.time = now.getHours().toString().padStart(2 , '0') + ':' + now.getMinutes().toString().padStart(2 , '0') ;
     this.qsos.unshift(newQso);
-    this.storage.set('qsos', this.qsos)
+    this.storage.set('qsos', this.qsos);
 
   }
 
   deleteMyValue(index: number) {
-   
+
     this.qsos.splice(index , 1);
     this.storage.set('qsos', this.qsos);
 
