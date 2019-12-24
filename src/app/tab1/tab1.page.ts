@@ -14,22 +14,24 @@ export class Tab1Page {
 
   constructor(private storage: Storage, public alertControl: AlertController) {
 
-    const that = this;
+    //const that = this;
 
     this.storage.get('qsos').then( (value) => {
 
       if ((value != null) && (value !== undefined)) {
 
-        that.qsos = value;
+        //that.qsos = value;
+        this.qsos = value;
 
       } else {
 
-        that.qsos = [];
+        //that.qsos = [];
+        this.qsos = [];
       }
 
     }).catch((error) => {
       console.log(error);
-      that.qsos = [];
+      this.qsos = [];
     });
 
   }
