@@ -17,29 +17,27 @@ export class Tab3Page implements OnInit {
 
     this.settingsStorage = storage;
     this.darkmode = false;
-    let that = this;
+    // let that = this;
 
-    this.storage.get('darkmode').then(function (value) {
+    this.storage.get('darkmode').then( (value) => {
 
-      if ((value != null) && (value != undefined)) {
+      if ((value != null) && (value !== undefined)) {
 
-        that.darkmode = value;
+        this.darkmode = value;
 
-        if(value == true) {
+        if (value === true) {
           document.body.classList.add('dark');
-          that.darkModeToggle = true;
+          this.darkModeToggle = true;
         }
-
-        console.log(value);
 
       } else {
 
-        that.darkmode = false;
+        this.darkmode = false;
       }
-      
+
     }).catch((error) => {
       console.log(error);
-      that.darkmode = false;
+      this.darkmode = false;
     });
 
   }
@@ -50,7 +48,7 @@ export class Tab3Page implements OnInit {
   toggleDarkMode() {
 
     this.darkmode = !this.darkmode;
-    if(this.darkmode == true) {
+    if (this.darkmode === true) {
       document.body.classList.add('dark');
     } else {
       document.body.classList.remove('dark');
