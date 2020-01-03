@@ -80,7 +80,9 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {}
     },
-    "platforms": [],
+    "platforms": [
+      "android"
+    ],
     "browserslist": []
   }
 }
