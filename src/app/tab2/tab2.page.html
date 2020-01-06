@@ -8,10 +8,10 @@
 
 <ion-content>
 
-    <ion-card>
+    <ion-card *ngFor="let qsos of qsoHistory; let i = index">
         <ion-card-header>
-          <ion-card-subtitle>2019-09-10</ion-card-subtitle>
-          <ion-card-title>CQ WW SSB</ion-card-title>
+        <ion-card-subtitle>{{qsos.timeSaved}}</ion-card-subtitle>
+          <ion-card-title>{{qsos.name}}</ion-card-title>
         </ion-card-header>
       
         <ion-card-content>
@@ -21,31 +21,11 @@
         </ion-card-content>
       </ion-card>
 
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>2019-09-07</ion-card-subtitle>
-          <ion-card-title>SSB Fieldday 2019</ion-card-title>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <ion-button color="warning" shape="round">export</ion-button>
-          <ion-button color="success" shape="round">edit</ion-button>
-          <ion-button color="danger" shape="round">delete</ion-button>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>2019-09-07</ion-card-subtitle>
-          <ion-card-title>SSB Fieldday 2019</ion-card-title>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <ion-button color="warning" shape="round">export</ion-button>
-          <ion-button color="success" shape="round">edit</ion-button>
-          <ion-button color="danger" shape="round">delete</ion-button>
-        </ion-card-content>
-      </ion-card>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="tertiary" (click)="saveQsoDialog()" >
+          <ion-icon name="save"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
 
 
 </ion-content>
