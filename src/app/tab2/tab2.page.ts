@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Tab1Page } from './../tab1/tab1.page';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
@@ -98,9 +99,17 @@ export class Tab2Page {
       console.log(error);
     }
 
+  }
 
-
-
+  async deleteQsos(index: number) {
+    try {
+      this.qsoHistory.splice(index, 1);
+      await this.storage.set('qsoHistory', this.qsoHistory);
+      console.log(this.qsoHistory);
+    }
+    catch(error) {
+      console.log(error);
+    }
   }
 
 }
