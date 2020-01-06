@@ -82,12 +82,14 @@ export class Tab2Page {
         return;
       }
 
-      this.template.qsoList = recentQsos;
-      this.template.name = name;
-      const now = new Date();
-      this.template.timeSaved = now.getFullYear().toString() + '-' + (now.getMonth()+1).toString().padStart(2, '0') + '-' + now.getDate().toString().padStart(2, '0');
+      const newEntry = Object.assign({}, this.template);
 
-      this.qsoHistory.unshift(this.template);
+      newEntry.qsoList = recentQsos;
+      newEntry.name = name;
+      const now = new Date();
+      newEntry.timeSaved = now.getFullYear().toString() + '-' + (now.getMonth()+1).toString().padStart(2, '0') + '-' + now.getDate().toString().padStart(2, '0');
+
+      this.qsoHistory.unshift(newEntry);
       this.qsoStorage.set('qsoHistory', this.qsoHistory);
       console.log(this.qsoHistory);
 
