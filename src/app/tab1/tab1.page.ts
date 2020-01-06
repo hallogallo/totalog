@@ -73,11 +73,65 @@ export class Tab1Page {
 
   }
 
-  async showEditDialog() {
+  async showEditDialog(qsoNumber: number) {
     const alert = await this.alertControl.create({
       header: 'Edit QSO',
-      message: 'This is an alert message.',
-      buttons: ['OK']
+      inputs: [
+        {
+          name: 'call',
+          type: 'text',
+          value: this.qsos[qsoNumber].call,
+          placeholder: 'Call'
+        },
+        {
+          name: 'band',
+          type: 'text',
+          id: 'name2-id',
+          value: this.qsos[qsoNumber].band,
+          placeholder: 'Band'
+        },
+        {
+          name: 'rstGiven',
+          type: 'text',
+          value: this.qsos[qsoNumber].rstGiven,
+          placeholder: 'RST TX'
+        },
+        {
+          name: 'rstReceived',
+          type: 'text',
+          value: this.qsos[qsoNumber].rstReceived,
+          placeholder: 'RST RX'
+        },
+        {
+          name: 'exchangeGiven',
+          type: 'text',
+          value: this.qsos[qsoNumber].exchangeGiven,
+          placeholder: 'Ex TX'
+        },
+        {
+          name: 'exchangeReceived',
+          type: 'text',
+          value: this.qsos[qsoNumber].exchangeReceived,
+          placeholder: 'Ex RX'
+        }],
+      //buttons: ['OK']
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'OK',
+          handler: (alertData) => {
+            this.qsos[qsoNumber].call = alertData.call;
+            this.qsos[qsoNumber].band = alertData.band;
+            this.qsos[qsoNumber].rstGiven = alertData.rstGiven;
+            this.qsos[qsoNumber].rstReceived = alertData.rstReceived;
+            this.qsos[qsoNumber].exchangeGiven = alertData.exchangeGiven;
+            this.qsos[qsoNumber].exchangeReceived = alertData.exchangeReceived;
+            this.storage.set('qsos', this.qsos);
+        }
+        }
+      ]
     });
     await alert.present();
   }
