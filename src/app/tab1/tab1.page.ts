@@ -1,3 +1,4 @@
+import { GlobalSettings } from './../globalsettings';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
@@ -11,21 +12,19 @@ import { AlertController } from '@ionic/angular';
 export class Tab1Page {
 
   qsos: Array<any>;
+  darkmode: boolean;
+  settings: GlobalSettings;
 
-  constructor(private storage: Storage, public alertControl: AlertController) {
+  constructor(private storage: Storage, private alertControl: AlertController, private globalSettings: GlobalSettings) {
 
-    //const that = this;
-
-    this.storage.get('qsos').then( (value) => {
+    this.storage.get('qsos').then((value) => {
 
       if ((value != null) && (value !== undefined)) {
 
-        //that.qsos = value;
         this.qsos = value;
 
       } else {
 
-        //that.qsos = [];
         this.qsos = [];
       }
 
@@ -33,6 +32,17 @@ export class Tab1Page {
       console.log(error);
       this.qsos = [];
     });
+
+
+    this.settings = globalSettings;
+    this.settings.ready.then(() => {
+
+      if (this.settings.darkmode === true) {
+        document.body.classList.add('dark');
+      }
+
+    });
+
 
   }
 
@@ -49,8 +59,8 @@ export class Tab1Page {
 
   updateMyValue() {
     const now = new Date();
-    const newQso = Object.assign({} , this.form); // copy content of object, don't link object itself!
-    newQso.time = now.getHours().toString().padStart(2 , '0') + ':' + now.getMinutes().toString().padStart(2 , '0') ;
+    const newQso = Object.assign({}, this.form); // copy content of object, don't link object itself!
+    newQso.time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
     this.qsos.unshift(newQso);
     this.storage.set('qsos', this.qsos);
 
@@ -58,7 +68,7 @@ export class Tab1Page {
 
   deleteMyValue(index: number) {
 
-    this.qsos.splice(index , 1);
+    this.qsos.splice(index, 1);
     this.storage.set('qsos', this.qsos);
 
   }
