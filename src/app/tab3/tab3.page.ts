@@ -34,7 +34,6 @@ export class Tab3Page {
       document.body.classList.remove('dark');
     }
 
-    console.log(this.settings.darkmode);
     this.settings.saveToStorage('darkmode' , this.settings.darkmode);
 
   }
