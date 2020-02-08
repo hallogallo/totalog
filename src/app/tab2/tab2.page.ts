@@ -3,6 +3,8 @@ import { Tab1Page } from './../tab1/tab1.page';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
+import { ModalController} from '@ionic/angular';
+import { QsoEditModalPage } from './../qso-edit-modal/qso-edit-modal.page';
 
 @Component({
   selector: 'app-tab2',
@@ -14,7 +16,7 @@ export class Tab2Page {
   qsoStorage: Storage;
   qsoHistory: Array<any>;
 
-  constructor(private storage: Storage, private alertControl: AlertController) {
+  constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController) {
 
     this.qsoStorage = storage;
 
@@ -110,6 +112,13 @@ export class Tab2Page {
     catch(error) {
       console.log(error);
     }
+  }
+
+  async showQsoEditModal() {
+    const modal = await this.modalCtrl.create({  
+      component: QsoEditModalPage 
+    });  
+    return await modal.present();   
   }
 
 }
