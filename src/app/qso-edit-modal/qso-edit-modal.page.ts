@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController} from '@ionic/angular'; 
+import { ModalController, NavParams } from '@ionic/angular'; 
 
 @Component({
   selector: 'app-qso-edit-modal',
@@ -8,7 +8,14 @@ import { ModalController} from '@ionic/angular';
 })
 export class QsoEditModalPage implements OnInit {
 
-  constructor(public modalCtrl: ModalController) { }
+  qsoEditList: any;
+  data: any;
+
+  constructor(public modalCtrl: ModalController, navParams: NavParams) { 
+    this.qsoEditList = navParams.data.qsoList;
+    this.data = navParams.data;
+    //console.log(navParams);
+  }
 
   ngOnInit() {
   }

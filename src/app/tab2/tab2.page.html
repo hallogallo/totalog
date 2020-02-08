@@ -15,14 +15,14 @@
         </ion-card-header>
       
         <ion-card-content>
-          <ion-button color="primary" shape="round">export</ion-button>
-          <ion-button color="secondary" shape="round" (click)="showQsoEditModal()">edit</ion-button>
+          <ion-button color="secondary" shape="round">export</ion-button>
+          <ion-button color="tertiary" shape="round" (click)="showQsoEditModal(i)">edit</ion-button>
           <ion-button color="danger" shape="round" (click)="deleteQsos(i)">delete</ion-button>
         </ion-card-content>
       </ion-card>
 
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button color="tertiary" (click)="saveQsoDialog()" >
+        <ion-fab-button color="primary" (click)="saveQsoDialog()" >
           <ion-icon name="save"></ion-icon>
         </ion-fab-button>
       </ion-fab>
