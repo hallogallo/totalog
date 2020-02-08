@@ -5,7 +5,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  }
+  },
+  { path: 'qso-edit-modal', loadChildren: './qso-edit-modal/qso-edit-modal.module#QsoEditModalPageModule' }
 ];
 @NgModule({
   imports: [
