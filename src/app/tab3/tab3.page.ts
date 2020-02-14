@@ -1,5 +1,7 @@
 import { GlobalSettings } from './../globalsettings';
 import { Component } from '@angular/core';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
 
 @Component({
   selector: 'app-tab3',
@@ -13,7 +15,7 @@ export class Tab3Page {
   settingsStorage: Storage;
   settings: GlobalSettings;
 
-  constructor(private globalSettings: GlobalSettings) {
+  constructor(private globalSettings: GlobalSettings, private statusBar: StatusBar) {
 
     this.settings = globalSettings;
 
@@ -30,8 +32,13 @@ export class Tab3Page {
     this.settings.darkmode = !this.settings.darkmode;
     if (this.settings.darkmode === true) {
       document.body.classList.add('dark');
+      this.statusBar.backgroundColorByName("black");
+      this.statusBar.styleBlackOpaque();
+
     } else {
       document.body.classList.remove('dark');
+      this.statusBar.backgroundColorByName("white");
+      this.statusBar.styleDefault();
     }
 
     this.settings.saveToStorage('darkmode' , this.settings.darkmode);
