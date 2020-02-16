@@ -64,7 +64,7 @@ export class Tab1Page {
     exchangeReceived: ''
   };
 
-  updateMyValue() {
+  logQso() {
     const now = new Date();
     const newQso = Object.assign({}, this.form); // copy content of object, don't link object itself!
     newQso.time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
