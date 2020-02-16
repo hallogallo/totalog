@@ -73,7 +73,7 @@ export class Tab1Page {
 
   }
 
-  deleteMyValue(index: number) {
+  deleteQso(index: number) {
 
     this.qsos.splice(index, 1);
     this.storage.set('qsos', this.qsos);
