@@ -94,7 +94,6 @@ export class Tab2Page {
 
       this.qsoHistory.unshift(newEntry);
       this.qsoStorage.set('qsoHistory', this.qsoHistory);
-      console.log(this.qsoHistory);
 
     }
     catch (error) { 
@@ -107,7 +106,6 @@ export class Tab2Page {
     try {
       this.qsoHistory.splice(index, 1);
       await this.storage.set('qsoHistory', this.qsoHistory);
-      console.log(this.qsoHistory);
     }
     catch(error) {
       console.log(error);
@@ -119,7 +117,13 @@ export class Tab2Page {
       component: QsoEditModalPage,
       componentProps: this.qsoHistory[index]
     });  
-    return await modal.present();   
+
+    let temp = await modal.present(); 
+    const { data } = await modal.onWillDismiss();
+    this.qsoHistory[index].qsoList = data;
+    await this.storage.set('qsoHistory', this.qsoHistory);
+    return temp;
+
   }
 
 }

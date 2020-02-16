@@ -14,14 +14,18 @@ export class QsoEditModalPage implements OnInit {
   constructor(public modalCtrl: ModalController, navParams: NavParams) { 
     this.qsoEditList = navParams.data.qsoList;
     this.data = navParams.data;
-    //console.log(navParams);
+    console.log(navParams);
   }
 
   ngOnInit() {
   }
 
   dismiss() {  
-      this.modalCtrl.dismiss();  
+      this.modalCtrl.dismiss(this.qsoEditList);  
    } 
+
+  deleteQso(index: number) {
+    this.qsoEditList.splice(index, 1);
+  }
 
 }
