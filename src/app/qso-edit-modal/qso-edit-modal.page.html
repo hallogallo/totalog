@@ -16,7 +16,7 @@
       <ion-label>
       <h2>{{qso.time}} &nbsp; <strong>{{qso.call}}</strong> </h2>
       </ion-label>
-      <ion-button color="tertiary" shape="round">edit</ion-button>
+      <ion-button (click)="showEditDialog(i)" color="tertiary" shape="round">edit</ion-button>
       <ion-button (click)="deleteQso(i)" color="danger" shape="round">delete</ion-button>
     </ion-item>
   </ion-list>
