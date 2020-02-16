@@ -71,6 +71,13 @@ export class Tab1Page {
     this.qsos.unshift(newQso);
     this.storage.set('qsos', this.qsos);
 
+    // clear inputs
+    this.form.call = '';
+    this.form.exchangeGiven = '';
+    this.form.exchangeReceived = '';
+    this.form.rstGiven = '59';
+    this.form.rstReceived = '59';
+
   }
 
   deleteQso(index: number) {
