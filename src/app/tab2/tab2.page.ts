@@ -103,13 +103,31 @@ export class Tab2Page {
   }
 
   async deleteQsos(index: number) {
-    try {
-      this.qsoHistory.splice(index, 1);
-      await this.storage.set('qsoHistory', this.qsoHistory);
-    }
-    catch(error) {
-      console.log(error);
-    }
+
+    const alert = await this.alertControl.create({
+      header: 'Delete QSO',
+      message: 'Are you sure?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'OK',
+            handler: async () => {
+              try {
+                this.qsoHistory.splice(index, 1);
+                await this.storage.set('qsoHistory', this.qsoHistory);
+              }
+              catch(error) {
+                console.log(error);
+              }
+            }
+          }
+        ]});
+
+        await alert.present();
+
   }
 
   async showQsoEditModal(index: number) {
