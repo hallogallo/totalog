@@ -148,4 +148,35 @@ export class Tab2Page {
 
   }
 
+  async exportQsos(index: number) {
+    const alert = await this.alertControl.create({
+      header: 'Export QSOs',
+        buttons: [
+          {
+            text: 'Copy to clipboard',
+            handler: (alertData) => {
+              //this.saveQsos(false, alertData.name);
+            }
+          },
+          {
+            text: 'Share',
+            handler: (alertData) => {
+
+            }
+          },
+          {
+            text: 'Save file',
+            handler: (alertData) => {
+
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          }
+        ]});
+
+        await alert.present();
+  }
+
 }

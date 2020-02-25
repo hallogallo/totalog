@@ -15,7 +15,7 @@
         </ion-card-header>
       
         <ion-card-content>
-          <ion-button color="secondary" shape="round">export</ion-button>
+          <ion-button color="secondary" shape="round" (click)="exportQsos(i)">export</ion-button>
           <ion-button color="tertiary" shape="round" (click)="showQsoEditModal(i)">edit</ion-button>
           <ion-button color="danger" shape="round" (click)="deleteQsos(i)">delete</ion-button>
         </ion-card-content>
