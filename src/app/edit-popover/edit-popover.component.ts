@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavParams } from '@ionic/angular'; 
+import { NgFormSelectorWarning } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-popover',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditPopoverComponent implements OnInit {
 
-  constructor() { }
+  qsoParams: any;
+
+  constructor( navParams: NavParams) { 
+    this.qsoParams = navParams.data;
+    //console.log(navParams.data.qsoNumber);
+  }
 
   ngOnInit() {}
 

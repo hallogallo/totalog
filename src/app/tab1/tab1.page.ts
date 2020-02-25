@@ -153,7 +153,7 @@ export class Tab1Page {
     await alert.present(); */
     const popover = await this.popoverController.create({
       component: EditPopoverComponent,
-      // event: ev,
+      componentProps: {qsoNumber},
       translucent: true
     });
     return await popover.present();
