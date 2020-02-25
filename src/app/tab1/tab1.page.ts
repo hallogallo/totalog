@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { PopoverController } from '@ionic/angular';
+import { EditPopoverComponent } from '../edit-popover/edit-popover.component';
 
 
 @Component({
@@ -17,7 +19,8 @@ export class Tab1Page {
   darkmode: boolean;
   settings: GlobalSettings;
 
-  constructor(private storage: Storage, private alertControl: AlertController, private globalSettings: GlobalSettings, private statusBar: StatusBar) {
+  constructor(private storage: Storage, private alertControl: AlertController, private globalSettings: GlobalSettings,
+              private statusBar: StatusBar, public popoverController: PopoverController) {
 
     this.storage.get('qsos').then((value) => {
 
@@ -88,7 +91,7 @@ export class Tab1Page {
   }
 
   async showEditDialog(qsoNumber: number) {
-    const alert = await this.alertControl.create({
+/*     const alert = await this.alertControl.create({
       header: 'Edit QSO',
       inputs: [
         {
@@ -147,7 +150,14 @@ export class Tab1Page {
         }
       ]
     });
-    await alert.present();
+    await alert.present(); */
+    const popover = await this.popoverController.create({
+      component: EditPopoverComponent,
+      // event: ev,
+      translucent: true
+    });
+    return await popover.present();
+
   }
 
 }

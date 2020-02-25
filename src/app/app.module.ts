@@ -9,10 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { QsoEditModalPageModule } from './qso-edit-modal/qso-edit-modal.module';
+import { EditPopoverComponent } from './edit-popover/edit-popover.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, EditPopoverComponent],
+  entryComponents: [EditPopoverComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), QsoEditModalPageModule],
   providers: [
     StatusBar,
