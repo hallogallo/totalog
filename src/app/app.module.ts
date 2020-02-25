@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { QsoEditModalPageModule } from './qso-edit-modal/qso-edit-modal.module';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { QsoEditModalPageModule } from './qso-edit-modal/qso-edit-modal.module';
     StatusBar,
     SplashScreen,
     GlobalSettings,
+    Clipboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

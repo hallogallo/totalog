@@ -7,6 +7,10 @@ import { AlertController } from '@ionic/angular';
 import { ModalController} from '@ionic/angular';
 import { QsoEditModalPage } from './../qso-edit-modal/qso-edit-modal.page';
 import { IonRouterOutlet } from '@ionic/angular';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { ToastController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-tab2',
@@ -18,7 +22,8 @@ export class Tab2Page {
   qsoStorage: Storage;
   qsoHistory: Array<any>;
 
-  constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController, private routerOutlet: IonRouterOutlet) {
+  constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController,
+    private routerOutlet: IonRouterOutlet, private clipboard: Clipboard, public toastController: ToastController) {
 
     this.qsoStorage = storage;
 
@@ -155,7 +160,7 @@ export class Tab2Page {
           {
             text: 'Copy to clipboard',
             handler: (alertData) => {
-              //this.saveQsos(false, alertData.name);
+              this.copyToClipboard();
             }
           },
           {
@@ -177,6 +182,15 @@ export class Tab2Page {
         ]});
 
         await alert.present();
+  }
+
+  async copyToClipboard() {
+    this.clipboard.copy('Hello world');
+    const toast = await this.toastController.create({
+      message: 'Your log has been copied!',
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
