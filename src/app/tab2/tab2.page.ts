@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { async } from '@angular/core/testing';
 import { Tab1Page } from './../tab1/tab1.page';
 import { Component } from '@angular/core';
@@ -5,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { ModalController} from '@ionic/angular';
 import { QsoEditModalPage } from './../qso-edit-modal/qso-edit-modal.page';
+import { IonRouterOutlet } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -16,7 +18,7 @@ export class Tab2Page {
   qsoStorage: Storage;
   qsoHistory: Array<any>;
 
-  constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController) {
+  constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController, private routerOutlet: IonRouterOutlet) {
 
     this.qsoStorage = storage;
 
@@ -133,7 +135,9 @@ export class Tab2Page {
   async showQsoEditModal(index: number) {
     const modal = await this.modalCtrl.create({  
       component: QsoEditModalPage,
-      componentProps: this.qsoHistory[index]
+      componentProps: this.qsoHistory[index],
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl
     });  
 
     let temp = await modal.present(); 
