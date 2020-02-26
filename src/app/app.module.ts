@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { QsoEditModalPageModule } from './qso-edit-modal/qso-edit-modal.module';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     SplashScreen,
     GlobalSettings,
     Clipboard,
+    SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

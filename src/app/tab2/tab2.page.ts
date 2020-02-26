@@ -9,6 +9,9 @@ import { QsoEditModalPage } from './../qso-edit-modal/qso-edit-modal.page';
 import { IonRouterOutlet } from '@ionic/angular';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { ToastController } from '@ionic/angular';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { ThrowStmt } from '@angular/compiler';
+
 
 
 
@@ -23,7 +26,8 @@ export class Tab2Page {
   qsoHistory: Array<any>;
 
   constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet, private clipboard: Clipboard, public toastController: ToastController) {
+    private routerOutlet: IonRouterOutlet, private clipboard: Clipboard, public toastController: ToastController,
+    private socialSharing: SocialSharing) {
 
     this.qsoStorage = storage;
 
@@ -166,7 +170,7 @@ export class Tab2Page {
           {
             text: 'Share',
             handler: (alertData) => {
-
+              this.socialShare();
             }
           },
           {
@@ -191,6 +195,15 @@ export class Tab2Page {
       duration: 2000
     });
     toast.present();
+  }
+
+  async socialShare() {
+    let options = {
+      message: 'share this', 
+      url: 'https://www.website.com/foo/#bar?a=b',
+    };
+
+    this.socialSharing.shareWithOptions(options);
   }
 
 }
