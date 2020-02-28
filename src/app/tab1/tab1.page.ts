@@ -151,9 +151,10 @@ export class Tab1Page {
       ]
     });
     await alert.present(); */
+    let editedQso = this.qsos[qsoNumber];
     const popover = await this.popoverController.create({
       component: EditPopoverComponent,
-      componentProps: {qsoNumber},
+      componentProps: {editedQso},
       translucent: true
     });
     return await popover.present();

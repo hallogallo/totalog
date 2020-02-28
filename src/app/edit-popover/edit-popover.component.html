@@ -1,4 +1,51 @@
-<p>
-  edit-popover works!
-  {{ qsoParams.qsoNumber }}
-</p>
+<ion-content>
+  <div>
+    <ion-input
+      type="text"
+      placeholder="Call"
+      [(ngModel)]="qsoParams.call"
+      name="title"
+    ></ion-input>
+  </div>
+
+  <ion-select placeholder="Band" [(ngModel)]="qsoParams.band">
+    <ion-select-option value="2m">2m</ion-select-option>
+    <ion-select-option value="70cm">70cm</ion-select-option>
+  </ion-select>
+
+  <div>
+    <ion-input
+      type="text"
+      placeholder="RST TX"
+      [(ngModel)]="qsoParams.rstGiven"
+      name="title"
+    ></ion-input>
+  </div>
+
+  <div>
+    <ion-input
+      type="text"
+      placeholder="RST RX"
+      [(ngModel)]="qsoParams.rstReceived"
+      name="title"
+    ></ion-input>
+  </div>
+
+  <div>
+    <ion-input
+      type="text"
+      placeholder="EX TX"
+      [(ngModel)]="qsoParams.exchangeGiven"
+      name="title"
+    ></ion-input>
+  </div>
+
+  <div>
+    <ion-input
+      type="text"
+      placeholder="EX RX"
+      [(ngModel)]="qsoParams.exchangeReceived"
+      name="title"
+    ></ion-input>
+  </div>
+</ion-content>

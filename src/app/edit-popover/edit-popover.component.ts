@@ -12,8 +12,8 @@ export class EditPopoverComponent implements OnInit {
   qsoParams: any;
 
   constructor( navParams: NavParams) { 
-    this.qsoParams = navParams.data;
-    //console.log(navParams.data.qsoNumber);
+    this.qsoParams = navParams.data.editedQso;
+    console.log(this.qsoParams);
   }
 
   ngOnInit() {}
