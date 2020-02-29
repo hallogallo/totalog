@@ -1,51 +1,65 @@
+<ion-header class="ion-no-border">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-title>Edit QSO</ion-title>
+        </ion-col>
+        <ion-col>
+          <ion-button color="secondary" shape="round" size="small" strong="true" expand="block">Save QSO</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>   
+</ion-header>
+
+
 <ion-content>
-  <div>
+
+  <ion-item>
+    <ion-label position="floating">Call</ion-label>
     <ion-input
       type="text"
-      placeholder="Call"
-      [(ngModel)]="qsoParams.call"
-      name="title"
-    ></ion-input>
-  </div>
+      [(ngModel)]="qsoParams.call">
+    </ion-input>
+  </ion-item>
 
+  <ion-item>
+    <ion-label position="floating">Band</ion-label>
   <ion-select placeholder="Band" [(ngModel)]="qsoParams.band">
     <ion-select-option value="2m">2m</ion-select-option>
     <ion-select-option value="70cm">70cm</ion-select-option>
   </ion-select>
+  </ion-item>
 
-  <div>
+  <ion-item>
+    <ion-label position="floating">RST TX</ion-label>
+    <ion-input
+      type="number"
+      [(ngModel)]="qsoParams.rstGiven">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">RST RX</ion-label>
+    <ion-input
+      type="number"
+      [(ngModel)]="qsoParams.rstReceived">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">EX TX</ion-label>
     <ion-input
       type="text"
-      placeholder="RST TX"
-      [(ngModel)]="qsoParams.rstGiven"
-      name="title"
-    ></ion-input>
-  </div>
+      [(ngModel)]="qsoParams.exchangeGiven">
+    </ion-input>
+  </ion-item>
 
-  <div>
+  <ion-item>
+    <ion-label position="floating">EX RX</ion-label>
     <ion-input
       type="text"
-      placeholder="RST RX"
-      [(ngModel)]="qsoParams.rstReceived"
-      name="title"
-    ></ion-input>
-  </div>
+      [(ngModel)]="qsoParams.exchangeReceived">
+    </ion-input>
+  </ion-item>
 
-  <div>
-    <ion-input
-      type="text"
-      placeholder="EX TX"
-      [(ngModel)]="qsoParams.exchangeGiven"
-      name="title"
-    ></ion-input>
-  </div>
-
-  <div>
-    <ion-input
-      type="text"
-      placeholder="EX RX"
-      [(ngModel)]="qsoParams.exchangeReceived"
-      name="title"
-    ></ion-input>
-  </div>
 </ion-content>
