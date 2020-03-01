@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular'; 
+import { NavParams, PopoverController } from '@ionic/angular'; 
 import { NgFormSelectorWarning } from '@angular/forms';
 
 @Component({
@@ -11,11 +11,14 @@ export class EditPopoverComponent implements OnInit {
 
   qsoParams: any;
 
-  constructor( navParams: NavParams) { 
+  constructor( navParams: NavParams, private popoverController: PopoverController) { 
     this.qsoParams = navParams.data.editedQso;
-    console.log(this.qsoParams);
   }
 
   ngOnInit() {}
+
+  async dismissAndSave() {
+    await this.popoverController.dismiss(true);
+  }
 
 }
