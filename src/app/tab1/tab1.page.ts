@@ -1,8 +1,9 @@
 import { GlobalSettings } from './../globalsettings';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { PopoverController } from '@ionic/angular';
+import { EditPopoverComponent } from '../edit-popover/edit-popover.component';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class Tab1Page {
   darkmode: boolean;
   settings: GlobalSettings;
 
-  constructor(private storage: Storage, private alertControl: AlertController, private globalSettings: GlobalSettings, private statusBar: StatusBar) {
+  constructor(private storage: Storage, private globalSettings: GlobalSettings,
+              private statusBar: StatusBar, public popoverController: PopoverController) {
 
     this.storage.get('qsos').then((value) => {
 
@@ -88,66 +90,25 @@ export class Tab1Page {
   }
 
   async showEditDialog(qsoNumber: number) {
-    const alert = await this.alertControl.create({
-      header: 'Edit QSO',
-      inputs: [
-        {
-          name: 'call',
-          type: 'text',
-          value: this.qsos[qsoNumber].call,
-          placeholder: 'Call'
-        },
-        {
-          name: 'band',
-          type: 'text',
-          id: 'name2-id',
-          value: this.qsos[qsoNumber].band,
-          placeholder: 'Band'
-        },
-        {
-          name: 'rstGiven',
-          type: 'text',
-          value: this.qsos[qsoNumber].rstGiven,
-          placeholder: 'RST TX'
-        },
-        {
-          name: 'rstReceived',
-          type: 'text',
-          value: this.qsos[qsoNumber].rstReceived,
-          placeholder: 'RST RX'
-        },
-        {
-          name: 'exchangeGiven',
-          type: 'text',
-          value: this.qsos[qsoNumber].exchangeGiven,
-          placeholder: 'Ex TX'
-        },
-        {
-          name: 'exchangeReceived',
-          type: 'text',
-          value: this.qsos[qsoNumber].exchangeReceived,
-          placeholder: 'Ex RX'
-        }],
 
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        }, {
-          text: 'OK',
-          handler: (alertData) => {
-            this.qsos[qsoNumber].call = alertData.call;
-            this.qsos[qsoNumber].band = alertData.band;
-            this.qsos[qsoNumber].rstGiven = alertData.rstGiven;
-            this.qsos[qsoNumber].rstReceived = alertData.rstReceived;
-            this.qsos[qsoNumber].exchangeGiven = alertData.exchangeGiven;
-            this.qsos[qsoNumber].exchangeReceived = alertData.exchangeReceived;
-            this.storage.set('qsos', this.qsos);
-        }
-        }
-      ]
+    let editedQso = Object.assign({}, this.qsos[qsoNumber]) ;
+
+    const popover = await this.popoverController.create({
+      component: EditPopoverComponent,
+      componentProps: {editedQso},
+      translucent: true
     });
-    await alert.present();
+
+
+    popover.onDidDismiss().then(data => {
+      if(data.data) { // flag is set by save button on popover
+        Object.assign(this.qsos[qsoNumber], editedQso);
+        this.storage.set('qsos', this.qsos);
+      }
+    });
+    
+    return await popover.present();
+
   }
 
 }
