@@ -1,7 +1,6 @@
 import { GlobalSettings } from './../globalsettings';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { PopoverController } from '@ionic/angular';
 import { EditPopoverComponent } from '../edit-popover/edit-popover.component';
@@ -19,7 +18,7 @@ export class Tab1Page {
   darkmode: boolean;
   settings: GlobalSettings;
 
-  constructor(private storage: Storage, private alertControl: AlertController, private globalSettings: GlobalSettings,
+  constructor(private storage: Storage, private globalSettings: GlobalSettings,
               private statusBar: StatusBar, public popoverController: PopoverController) {
 
     this.storage.get('qsos').then((value) => {

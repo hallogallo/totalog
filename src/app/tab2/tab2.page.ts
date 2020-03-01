@@ -1,6 +1,3 @@
-import { RouterModule } from '@angular/router';
-import { async } from '@angular/core/testing';
-import { Tab1Page } from './../tab1/tab1.page';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
