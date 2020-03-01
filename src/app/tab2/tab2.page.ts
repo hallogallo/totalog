@@ -133,6 +133,7 @@ export class Tab2Page {
   }
 
   async showQsoEditModal(index: number) {
+    
     const modal = await this.modalCtrl.create({  
       component: QsoEditModalPage,
       componentProps: this.qsoHistory[index],
