@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular'; 
 import { AlertController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import { EditPopoverComponent } from '../edit-popover/edit-popover.component';
 
 @Component({
   selector: 'app-qso-edit-modal',
@@ -12,10 +14,9 @@ export class QsoEditModalPage implements OnInit {
   qsoEditList: any;
   data: any;
 
-  constructor(public modalCtrl: ModalController, navParams: NavParams, private alertControl: AlertController) { 
+  constructor(public modalCtrl: ModalController, navParams: NavParams, private alertControl: AlertController, public popoverController: PopoverController) { 
     this.qsoEditList = navParams.data.qsoList;
     this.data = navParams.data;
-    console.log(navParams);
   }
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class QsoEditModalPage implements OnInit {
   }
 
   async showEditDialog(qsoNumber: number) {
-    const alert = await this.alertControl.create({
+/*     const alert = await this.alertControl.create({
       header: 'Edit QSO',
       inputs: [
         {
@@ -88,7 +89,25 @@ export class QsoEditModalPage implements OnInit {
         }
       ]
     });
-    await alert.present();
+    await alert.present(); */
+
+    let editedQso = Object.assign({}, this.qsoEditList[qsoNumber]) ;
+
+    const popover = await this.popoverController.create({
+      component: EditPopoverComponent,
+      componentProps: {editedQso},
+      translucent: true
+    });
+
+
+    popover.onDidDismiss().then(data => {
+      if(data.data) { // flag is set by save button on popover
+        Object.assign(this.qsoEditList[qsoNumber], editedQso);
+      }
+    });
+    
+    return await popover.present();
+
   }
 
 }
