@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular'; 
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { ModalController, NavParams, Platform } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { EditPopoverComponent } from '../edit-popover/edit-popover.component';
 
@@ -8,22 +8,26 @@ import { EditPopoverComponent } from '../edit-popover/edit-popover.component';
   templateUrl: './qso-edit-modal.page.html',
   styleUrls: ['./qso-edit-modal.page.scss'],
 })
-export class QsoEditModalPage implements OnInit {
+
+export class QsoEditModalPage {
 
   qsoEditList: any;
   data: any;
 
-  constructor(public modalCtrl: ModalController, navParams: NavParams, public popoverController: PopoverController) { 
+  constructor(public modalCtrl: ModalController, navParams: NavParams, public popoverController: PopoverController,
+    private platform: Platform) {
     this.qsoEditList = navParams.data.qsoList;
     this.data = navParams.data;
+    this.platform.backButton.subscribeWithPriority(100000000,
+      () => {
+        this.dismiss();
+      });
+
   }
 
-  ngOnInit() {
+  dismiss() {
+    this.modalCtrl.dismiss(this.qsoEditList);
   }
-
-  dismiss() {  
-      this.modalCtrl.dismiss(this.qsoEditList);  
-   } 
 
   deleteQso(index: number) {
     this.qsoEditList.splice(index, 1);
@@ -31,21 +35,21 @@ export class QsoEditModalPage implements OnInit {
 
   async showEditDialog(qsoNumber: number) {
 
-    let editedQso = Object.assign({}, this.qsoEditList[qsoNumber]) ;
+    let editedQso = Object.assign({}, this.qsoEditList[qsoNumber]);
 
     const popover = await this.popoverController.create({
       component: EditPopoverComponent,
-      componentProps: {editedQso},
+      componentProps: { editedQso },
       translucent: true
     });
 
 
     popover.onDidDismiss().then(data => {
-      if(data.data) { // flag is set by save button on popover
+      if (data.data) { // flag is set by save button on popover
         Object.assign(this.qsoEditList[qsoNumber], editedQso);
       }
     });
-    
+
     return await popover.present();
 
   }
