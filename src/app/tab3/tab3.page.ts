@@ -95,8 +95,6 @@ export class Tab3Page {
 
     await timeOffsetPicker.present();
 
-    this.generateTimeOffsetValues();
-
   }
 
   generateTimeOffsetValues() {
