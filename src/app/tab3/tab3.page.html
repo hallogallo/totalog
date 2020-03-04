@@ -7,6 +7,13 @@
 <ion-content>
 
     <ion-list>
+
+      <ion-item-divider>
+        <ion-label>
+          General
+        </ion-label>
+      </ion-item-divider>
+
         <ion-item lines="full">
           <ion-icon slot="start" name="moon"></ion-icon>
           <ion-label>
@@ -14,6 +21,46 @@
           </ion-label>
           <ion-toggle [(ngModel)]="darkModeToggle" id="darkmodetoggle" (click)="toggleDarkMode()" slot="end"></ion-toggle>
         </ion-item>
+
+        <ion-item-divider>
+          <ion-label>
+            OP Data
+          </ion-label>
+        </ion-item-divider>
+
+        <ion-item lines="full">
+          <ion-icon slot="start" name="information-circle"></ion-icon>
+          Callsign
+          <input type="text" slot="end"> 
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-icon slot="start" name="person"></ion-icon>
+          Name
+          <input type="text" slot="end"> 
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-icon slot="start" name="medal"></ion-icon>
+          Contest
+          <input type="text" slot="end"> 
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-icon slot="start" name="location"></ion-icon>
+          Locator
+          <input type="text" slot="end"> 
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-icon slot="start" name="airplane"></ion-icon>
+          Time Offset &nbsp; &nbsp; &nbsp;
+          <ion-chip color="tertiary">
+            <ion-label >UTC+2</ion-label>
+          </ion-chip>
+          <ion-button color="secondary" expand="full" size="default" shape="round" strong="true" slot="end" (click)="showTimeOffsetPicker()">Choose</ion-button>
+        </ion-item>
+
       </ion-list>
 
 </ion-content>

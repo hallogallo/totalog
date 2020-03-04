@@ -1,6 +1,7 @@
 import { GlobalSettings } from './../globalsettings';
 import { Component } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { PickerController } from '@ionic/angular';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class Tab3Page {
   settingsStorage: Storage;
   settings: GlobalSettings;
 
-  constructor(private globalSettings: GlobalSettings, private statusBar: StatusBar) {
+  constructor(private globalSettings: GlobalSettings, private statusBar: StatusBar, private pickerControl: PickerController) {
 
     this.settings = globalSettings;
 
@@ -43,6 +44,10 @@ export class Tab3Page {
 
     this.settings.saveToStorage('darkmode' , this.settings.darkmode);
 
+  }
+
+  showTimeOffsetPicker() {
+    
   }
 
 }
