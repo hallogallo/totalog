@@ -46,8 +46,79 @@ export class Tab3Page {
 
   }
 
-  showTimeOffsetPicker() {
-    
+  async showTimeOffsetPicker() {
+
+    let columns = [
+      {
+        name: "time offset",
+        options: [
+          { text: 'UTC', value: 'UTC' },
+          { text: 'UTC+1', value: 'UTC+1' }
+        ]
+      }
+    ];
+
+    let buttons = [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Confirm',
+        handler: (value) => {
+          console.log(`Got Value ${value}`);
+        }
+      }
+    ];
+
+    const timeOffsetPicker = await this.pickerControl.create({
+      columns: [
+        {
+          name: "time offset",
+          options: this.generateTimeOffsetValues()
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirm',
+          handler: (value) => {
+            console.log(value);
+          }
+        }
+      ]
+
+    });
+
+    await timeOffsetPicker.present();
+
+    this.generateTimeOffsetValues();
+
+  }
+
+  generateTimeOffsetValues() {
+    let options = [];
+    for(let i=-12; i<13; i++) {
+
+      if(i<0) {
+        options.push({text: `UTC${i}`, value:`${i}`});
+      }
+
+      if(i==0) {
+        options.push({text: 'UTC', value:`${i}`});
+      }
+
+      if(i>0) {
+        options.push({text: `UTC+${i}`, value:`${i}`});
+      }
+
+    }
+
+    return options;
+
   }
 
 }
