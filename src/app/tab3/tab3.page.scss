@@ -1,0 +1,26 @@
+input {
+    border-radius: 30px;
+    border-spacing: 3px;
+    border-style: none;
+    border-color: #aaaaaa;
+    padding: 10px;
+    background-color:var(--ion-input-color);
+    color: var(--ion-input-text-color);
+    //width: 97%;
+    margin:7px;
+  }
+
+  textarea:focus, input:focus{
+    outline: none;
+    border: solid 1px var(--ion-color-secondary);
+  }
+  
+  ::placeholder { // Chrome, Firefox, Opera, Safari 10.1+
+    color: var(--ion-placeholder-color);
+    opacity: 1; // Firefox
+    font-style: italic;
+  }
+
+  ion-button {
+    margin:7px;
+  }
