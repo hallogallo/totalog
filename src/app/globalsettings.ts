@@ -8,9 +8,31 @@ export class GlobalSettings {
 
   darkmode: boolean;
   settingsStorage: Storage;
-  ready: any
+  ready: any;
+
+  opData: {
+    callsign: string,
+    name: string,
+    contest: string,
+    locator:string,
+    timeOffset: {
+      text: string,
+      value: number
+    }
+  };
 
   constructor(private storage: Storage) {
+
+    this.opData = {
+      callsign: '',
+      name: '',
+      contest: '',
+      locator:'',
+      timeOffset: {
+        text: '',
+        value: 0
+      }
+    };
 
     this.settingsStorage = storage;
     this.ready = this.initialize();
@@ -35,12 +57,28 @@ export class GlobalSettings {
       console.log(error);
     }
 
+    try {
+      const result = await this.storage.get('op-data');
+      if ((result != null) && (result !== undefined)) {
+
+        this.opData = result;
+
+      } 
+
+    }
+    catch (error) { 
+      console.log(error);
+    }
+
   }
 
-  saveToStorage(key: string, value: any) {
-
-    this.settingsStorage.set(key, value);
-
+  async saveToStorage(key: string, value: any) {
+    try {
+      this.settingsStorage.set(key, value);
+    }
+    catch (error) { 
+      console.log(error);
+    }
   }
 
 }

@@ -13,7 +13,6 @@ export class Tab3Page {
 
   darktoggle: any;
   darkModeToggle: boolean;
-  settingsStorage: Storage;
   settings: GlobalSettings;
 
   constructor(private globalSettings: GlobalSettings, private statusBar: StatusBar, private pickerControl: PickerController) {
@@ -24,7 +23,6 @@ export class Tab3Page {
       document.body.classList.add('dark');
       this.darkModeToggle = true;
     }
-
 
   }
 
@@ -48,33 +46,10 @@ export class Tab3Page {
 
   async showTimeOffsetPicker() {
 
-    let columns = [
-      {
-        name: "time offset",
-        options: [
-          { text: 'UTC', value: 'UTC' },
-          { text: 'UTC+1', value: 'UTC+1' }
-        ]
-      }
-    ];
-
-    let buttons = [
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      },
-      {
-        text: 'Confirm',
-        handler: (value) => {
-          console.log(`Got Value ${value}`);
-        }
-      }
-    ];
-
     const timeOffsetPicker = await this.pickerControl.create({
       columns: [
         {
-          name: "time offset",
+          name: "timeOffset",
           options: this.generateTimeOffsetValues()
         }
       ],
@@ -86,7 +61,8 @@ export class Tab3Page {
         {
           text: 'Confirm',
           handler: (value) => {
-            console.log(value);
+            this.settings.opData.timeOffset = value.timeOffset;
+            this.saveOpSettingsToStorage();
           }
         }
       ]
@@ -118,5 +94,14 @@ export class Tab3Page {
     return options;
 
   }
+
+  async saveOpSettingsToStorage() {
+    this.settings.saveToStorage('op-data', this.settings.opData);
+  }
+
+  ionViewWillLeave(){
+   this.saveOpSettingsToStorage();
+  }
+
 
 }
