@@ -8,6 +8,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { ToastController } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ThrowStmt } from '@angular/compiler';
+import { GlobalSettings } from './../globalsettings';
 
 
 
@@ -21,12 +22,14 @@ export class Tab2Page {
 
   qsoStorage: Storage;
   qsoHistory: Array<any>;
+  settings: GlobalSettings;
 
   constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet, private clipboard: Clipboard, public toastController: ToastController,
-    private socialSharing: SocialSharing) {
+    private socialSharing: SocialSharing, private globalSettings: GlobalSettings) {
 
     this.qsoStorage = storage;
+    this.settings = globalSettings;
 
     this.storage.get('qsoHistory').then((value) => {
 
@@ -162,7 +165,7 @@ export class Tab2Page {
           {
             text: 'Copy to clipboard',
             handler: (alertData) => {
-              this.copyToClipboard();
+              this.copyToClipboard(index);
             }
           },
           {
@@ -186,7 +189,8 @@ export class Tab2Page {
         await alert.present();
   }
 
-  async copyToClipboard() {
+  async copyToClipboard(index: number) {
+    this.generateCabrillo(index);
     this.clipboard.copy('Hello world');
     const toast = await this.toastController.create({
       message: 'Your log has been copied!',
@@ -202,6 +206,33 @@ export class Tab2Page {
     };
 
     this.socialSharing.shareWithOptions(options);
+  }
+
+  generateCabrillo(index: number) {
+    const qsosToExport = this.qsoHistory[index].qsoList;
+    let cabrilloString: string;
+    cabrilloString = 'START-OF-LOG: 3.0\n';
+
+    if(this.settings.opData.locator != '') {
+      cabrilloString = cabrilloString.concat(`LOCATION: ${this.settings.opData.locator}\n`);
+    }
+
+    if(this.settings.opData.callsign != '') {
+      cabrilloString = cabrilloString.concat(`CALLSIGN: ${this.settings.opData.callsign}\n`);
+    }
+
+    if(this.settings.opData.contest != '') {
+      cabrilloString = cabrilloString.concat(`CONTEST: ${this.settings.opData.contest}\n`);
+    }
+
+    if(this.settings.opData.name != '') {
+      cabrilloString = cabrilloString.concat(`NAME: ${this.settings.opData.name}\n`);
+    }
+
+    cabrilloString = cabrilloString.concat('CREATED-BY: TOTALOG\n');
+    
+    console.log(qsosToExport);
+    console.log(cabrilloString);
   }
 
 }
