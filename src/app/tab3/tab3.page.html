@@ -53,6 +53,18 @@
         </ion-item>
 
         <ion-item lines="full">
+          <ion-icon slot="start" name="options"></ion-icon>
+          Mode
+          <ion-select slot="end" [(ngModel)]="settings.opData.mode" placeholder="select mode..." (click)="saveOpSettingsToStorage()">
+            <ion-select-option value="PH">SSB</ion-select-option>
+            <ion-select-option value="CW">CW</ion-select-option>
+            <ion-select-option value="FM">FM</ion-select-option>
+            <ion-select-option value="RY">RTTY</ion-select-option>
+            <ion-select-option value="DG">other digimode</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="full">
           <ion-icon slot="start" name="airplane"></ion-icon>
           Time Offset &nbsp; &nbsp; &nbsp;
           <ion-chip color="tertiary">

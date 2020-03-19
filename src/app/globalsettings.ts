@@ -1,5 +1,5 @@
 import { async } from '@angular/core/testing';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 
@@ -14,7 +14,8 @@ export class GlobalSettings {
     callsign: string,
     name: string,
     contest: string,
-    locator:string,
+    locator: string,
+    mode: string,
     timeOffset: {
       text: string,
       value: number
@@ -27,7 +28,8 @@ export class GlobalSettings {
       callsign: '',
       name: '',
       contest: '',
-      locator:'',
+      locator: '',
+      mode: '',
       timeOffset: {
         text: '',
         value: 0
