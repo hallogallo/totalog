@@ -25,8 +25,8 @@ export class Tab2Page {
   settings: GlobalSettings;
 
   constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet, private clipboard: Clipboard, public toastController: ToastController,
-    private socialSharing: SocialSharing, private globalSettings: GlobalSettings) {
+              private routerOutlet: IonRouterOutlet, private clipboard: Clipboard, public toastController: ToastController,
+              private socialSharing: SocialSharing, private globalSettings: GlobalSettings) {
 
     this.qsoStorage = storage;
     this.settings = globalSettings;
@@ -50,7 +50,7 @@ export class Tab2Page {
   }
 
   template = {
-    name:'',
+    name: '',
     timeSaved: '',
     qsoList: [],
     operator: '',
@@ -64,7 +64,7 @@ export class Tab2Page {
           name: 'name',
           type: 'text',
           placeholder: 'name'
-        },],
+        }, ],
         buttons: [
           {
             text: 'Cancel',
@@ -82,9 +82,10 @@ export class Tab2Page {
               this.saveQsos(true, alertData.name);
             }
           }
-        ]});
+        ]
+      });
 
-        await alert.present();
+    await alert.present();
   }
 
   async saveQsos(deleteRecentQsos: boolean, name: string) {
@@ -92,7 +93,7 @@ export class Tab2Page {
     try {
       const recentQsos = await this.storage.get('qsos');
 
-      if ((recentQsos == null) || (recentQsos == undefined)) {
+      if ((recentQsos == null) || (recentQsos === undefined)) {
         return;
       }
 
@@ -101,13 +102,13 @@ export class Tab2Page {
       newEntry.qsoList = recentQsos;
       newEntry.name = name;
       const now = new Date();
-      newEntry.timeSaved = now.getFullYear().toString() + '-' + (now.getMonth()+1).toString().padStart(2, '0') + '-' + now.getDate().toString().padStart(2, '0');
+      newEntry.timeSaved = now.getFullYear().toString() + '-' + (now.getMonth() + 1).toString().padStart(2, '0')
+      + '-' + now.getDate().toString().padStart(2, '0');
 
       this.qsoHistory.unshift(newEntry);
       this.qsoStorage.set('qsoHistory', this.qsoHistory);
 
-    }
-    catch (error) { 
+    } catch (error) {
       console.log(error);
     }
 
@@ -129,28 +130,27 @@ export class Tab2Page {
               try {
                 this.qsoHistory.splice(index, 1);
                 await this.storage.set('qsoHistory', this.qsoHistory);
-              }
-              catch(error) {
+              } catch (error) {
                 console.log(error);
               }
             }
           }
         ]});
 
-        await alert.present();
+    await alert.present();
 
   }
 
   async showQsoEditModal(index: number) {
-    
-    const modal = await this.modalCtrl.create({  
+
+    const modal = await this.modalCtrl.create({
       component: QsoEditModalPage,
       componentProps: this.qsoHistory[index],
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl
-    });  
+    });
 
-    let temp = await modal.present(); 
+    const temp = await modal.present();
     const { data } = await modal.onWillDismiss();
     this.qsoHistory[index].qsoList = data;
     await this.storage.set('qsoHistory', this.qsoHistory);
@@ -188,7 +188,7 @@ export class Tab2Page {
       ]
       });
 
-        await alert.present();
+    await alert.present();
   }
 
   async copyToClipboard(index: number) {
@@ -202,8 +202,8 @@ export class Tab2Page {
   }
 
   async socialShare() {
-    let options = {
-      message: 'share this', 
+    const options = {
+      message: 'share this',
       url: 'https://www.website.com/foo/#bar?a=b',
     };
 
@@ -215,24 +215,24 @@ export class Tab2Page {
     let cabrilloString: string;
     cabrilloString = 'START-OF-LOG: 3.0\n';
 
-    if(this.settings.opData.locator != '') {
+    if (this.settings.opData.locator !== '') {
       cabrilloString = cabrilloString.concat(`LOCATION: ${this.settings.opData.locator}\n`);
     }
 
-    if(this.settings.opData.callsign != '') {
+    if (this.settings.opData.callsign !== '') {
       cabrilloString = cabrilloString.concat(`CALLSIGN: ${this.settings.opData.callsign}\n`);
     }
 
-    if(this.settings.opData.contest != '') {
+    if (this.settings.opData.contest !== '') {
       cabrilloString = cabrilloString.concat(`CONTEST: ${this.settings.opData.contest}\n`);
     }
 
-    if(this.settings.opData.name != '') {
+    if (this.settings.opData.name !== '') {
       cabrilloString = cabrilloString.concat(`NAME: ${this.settings.opData.name}\n`);
     }
 
     cabrilloString = cabrilloString.concat('CREATED-BY: TOTALOG\n');
-    
+
     console.log(qsosToExport);
     console.log(cabrilloString);
   }
