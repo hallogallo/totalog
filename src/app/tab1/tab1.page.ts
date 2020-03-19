@@ -43,11 +43,11 @@ export class Tab1Page {
 
       if (this.settings.darkmode === true) {
         document.body.classList.add('dark');
-        this.statusBar.backgroundColorByName("black");
+        this.statusBar.backgroundColorByName('black');
         this.statusBar.styleBlackOpaque();
-        
+
       } else {
-        this.statusBar.backgroundColorByName("white");
+        this.statusBar.backgroundColorByName('white');
         this.statusBar.styleDefault();
       }
 
@@ -91,7 +91,7 @@ export class Tab1Page {
 
   async showEditDialog(qsoNumber: number) {
 
-    let editedQso = Object.assign({}, this.qsos[qsoNumber]) ;
+    const editedQso = Object.assign({}, this.qsos[qsoNumber]) ;
 
     const popover = await this.popoverController.create({
       component: EditPopoverComponent,
@@ -101,12 +101,12 @@ export class Tab1Page {
 
 
     popover.onDidDismiss().then(data => {
-      if(data.data) { // flag is set by save button on popover
+      if (data.data) { // flag is set by save button on popover
         Object.assign(this.qsos[qsoNumber], editedQso);
         this.storage.set('qsos', this.qsos);
       }
     });
-    
+
     return await popover.present();
 
   }
