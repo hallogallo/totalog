@@ -31,7 +31,7 @@ export class Tab3Page {
     this.settings.darkmode = !this.settings.darkmode;
     if (this.settings.darkmode === true) {
       document.body.classList.add('dark');
-      this.statusBar.backgroundColorByName('black');
+      this.statusBar.backgroundColorByHexString('#0d0d0d');
       this.statusBar.styleBlackOpaque();
 
     } else {
