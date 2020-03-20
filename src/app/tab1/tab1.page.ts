@@ -70,7 +70,7 @@ export class Tab1Page {
   logQso() {
     const now = new Date();
     const newQso = Object.assign({}, this.form); // copy content of object, don't link object itself!
-    newQso.time = (now.getHours() - this.settings.opData.timeOffset.value).toString().padStart(2, '0') 
+    newQso.time = (now.getHours() - this.settings.opData.timeOffset.value).toString().padStart(2, '0')
     + ':' + now.getMinutes().toString().padStart(2, '0');
     newQso.date = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
     this.qsos.unshift(newQso);
