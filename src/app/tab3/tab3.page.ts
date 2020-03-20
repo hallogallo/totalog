@@ -31,12 +31,12 @@ export class Tab3Page {
     this.settings.darkmode = !this.settings.darkmode;
     if (this.settings.darkmode === true) {
       document.body.classList.add('dark');
-      this.statusBar.backgroundColorByName("black");
+      this.statusBar.backgroundColorByName('black');
       this.statusBar.styleBlackOpaque();
 
     } else {
       document.body.classList.remove('dark');
-      this.statusBar.backgroundColorByName("white");
+      this.statusBar.backgroundColorByName('white');
       this.statusBar.styleDefault();
     }
 
@@ -49,7 +49,7 @@ export class Tab3Page {
     const timeOffsetPicker = await this.pickerControl.create({
       columns: [
         {
-          name: "timeOffset",
+          name: 'timeOffset',
           options: this.generateTimeOffsetValues()
         }
       ],
@@ -74,19 +74,19 @@ export class Tab3Page {
   }
 
   generateTimeOffsetValues() {
-    let options = [];
-    for(let i=-12; i<13; i++) {
+    const options = [];
+    for (let i = -12; i < 13; i++) {
 
-      if(i<0) {
-        options.push({text: `UTC${i}`, value:`${i}`});
+      if (i < 0) {
+        options.push({text: `UTC${i}`, value: `${i}`});
       }
 
-      if(i==0) {
-        options.push({text: 'UTC', value:`${i}`});
+      if (i === 0) {
+        options.push({text: 'UTC', value: `${i}`});
       }
 
-      if(i>0) {
-        options.push({text: `UTC+${i}`, value:`${i}`});
+      if (i > 0) {
+        options.push({text: `UTC+${i}`, value: `${i}`});
       }
 
     }
@@ -99,7 +99,7 @@ export class Tab3Page {
     this.settings.saveToStorage('op-data', this.settings.opData);
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
    this.saveOpSettingsToStorage();
   }
 
