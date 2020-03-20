@@ -172,15 +172,15 @@ export class Tab2Page {
         {
           text: 'Share',
           handler: (alertData) => {
-            this.socialShare();
+            this.socialShare(index);
           }
         },
-        {
+/*         {
           text: 'Save file',
           handler: (alertData) => {
 
           }
-        },
+        }, */
         {
           text: 'Cancel',
           role: 'cancel',
@@ -192,8 +192,8 @@ export class Tab2Page {
   }
 
   async copyToClipboard(index: number) {
-    this.generateCabrillo(index);
-    this.clipboard.copy('Hello world');
+    // this.generateCabrillo(index);
+    this.clipboard.copy(this.generateCabrillo(index));
     const toast = await this.toastController.create({
       message: 'Your log has been copied!',
       duration: 2000
@@ -201,9 +201,9 @@ export class Tab2Page {
     toast.present();
   }
 
-  async socialShare() {
+  async socialShare(index: number) {
     const options = {
-      message: 'share this',
+      message: this.generateCabrillo(index),
       url: 'https://www.website.com/foo/#bar?a=b',
     };
 
@@ -211,6 +211,7 @@ export class Tab2Page {
   }
 
   generateCabrillo(index: number) {
+
     const qsosToExport = this.qsoHistory[index].qsoList;
     let cabrilloString: string;
     cabrilloString = 'START-OF-LOG: 3.0\n';
@@ -233,8 +234,27 @@ export class Tab2Page {
 
     cabrilloString = cabrilloString.concat('CREATED-BY: TOTALOG\n');
 
-    console.log(qsosToExport);
+    qsosToExport.map(qso => {
+
+      const frequencyPadded = qso.band.padStart(5, ' ');
+      const timeCut = qso.time.toString().replace(':', '');
+      const ownCallPadded = this.settings.opData.callsign.padEnd(13, ' ');
+      const rstGivenPadded = qso.rstGiven.toString().padStart(3, ' ');
+      const exchangeGivenPadded = qso.exchangeGiven.padEnd(6, ' ');
+      const foreignCallPadded = qso.call.padEnd(13, ' ');
+      const rstReceivedPadded = qso.rstReceived.toString().padStart(3, ' ');
+      const exchangeReceivedPadded = qso.exchangeReceived.padEnd(6, ' ');
+
+
+      cabrilloString = cabrilloString.concat(`QSO: ${frequencyPadded} ${this.settings.opData.mode} \
+      ${qso.date} ${timeCut} ${ownCallPadded} ${rstGivenPadded} ${exchangeGivenPadded} ${foreignCallPadded} \
+      ${rstReceivedPadded} ${exchangeReceivedPadded} 0\n`);
+    });
+
+    cabrilloString = cabrilloString.concat('END-OF-LOG:');
+
     console.log(cabrilloString);
+    return cabrilloString;
   }
 
 }
