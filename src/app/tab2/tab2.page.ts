@@ -112,48 +112,8 @@ export class Tab2Page {
 
   }
 
-  async deleteQsos(index: number) {
-
-    const alert = await this.alertControl.create({
-      header: 'Delete QSO',
-      message: 'Are you sure?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-          },
-          {
-            text: 'OK',
-            handler: async () => {
-              try {
-                this.qsoHistory.splice(index, 1);
-                await this.storage.set('qsoHistory', this.qsoHistory);
-              } catch (error) {
-                console.log(error);
-              }
-            }
-          }
-        ]});
-
-    await alert.present();
-
-  }
-
-  async showQsoEditModal(index: number) {
-
-    const modal = await this.modalCtrl.create({
-      component: QsoEditModalPage,
-      componentProps: this.qsoHistory[index],
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl
-    });
-
-    const temp = await modal.present();
-    const { data } = await modal.onWillDismiss();
-    this.qsoHistory[index].qsoList = data;
-    await this.storage.set('qsoHistory', this.qsoHistory);
-    return temp;
-
+  async loadQsos() {
+    
   }
 
   async exportQsos(index: number) {
@@ -187,6 +147,50 @@ export class Tab2Page {
       });
 
     await alert.present();
+  }
+
+  async showQsoEditModal(index: number) {
+
+    const modal = await this.modalCtrl.create({
+      component: QsoEditModalPage,
+      componentProps: this.qsoHistory[index],
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl
+    });
+
+    const temp = await modal.present();
+    const { data } = await modal.onWillDismiss();
+    this.qsoHistory[index].qsoList = data;
+    await this.storage.set('qsoHistory', this.qsoHistory);
+    return temp;
+
+  }
+
+  async deleteQsos(index: number) {
+
+    const alert = await this.alertControl.create({
+      header: 'Delete QSO',
+      message: 'Are you sure?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'OK',
+            handler: async () => {
+              try {
+                this.qsoHistory.splice(index, 1);
+                await this.storage.set('qsoHistory', this.qsoHistory);
+              } catch (error) {
+                console.log(error);
+              }
+            }
+          }
+        ]});
+
+    await alert.present();
+
   }
 
   async copyToClipboard(index: number) {
