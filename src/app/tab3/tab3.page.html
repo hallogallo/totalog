@@ -30,31 +30,27 @@
 
         <ion-item lines="full">
           <ion-icon slot="start" name="information-circle"></ion-icon>
-          Callsign
-          <input type="text" slot="end" [(ngModel)]="settings.opData.callsign" (click)="saveOpSettingsToStorage()"> 
+          <input type="text" slot="end" [(ngModel)]="settings.opData.callsign" (click)="saveOpSettingsToStorage()" placeholder="Callsign"> 
         </ion-item>
 
         <ion-item lines="full">
           <ion-icon slot="start" name="person"></ion-icon>
-          Name
-          <input type="text" slot="end" [(ngModel)]="settings.opData.name" (click)="saveOpSettingsToStorage()"> 
+          <input type="text" slot="end" [(ngModel)]="settings.opData.name" (click)="saveOpSettingsToStorage()" placeholder="Name"> 
         </ion-item>
 
         <ion-item lines="full">
           <ion-icon slot="start" name="trophy"></ion-icon>
-          Contest
-          <input type="text" slot="end" [(ngModel)]="settings.opData.contest" (click)="saveOpSettingsToStorage()"> 
+          <input type="text" slot="end" [(ngModel)]="settings.opData.contest" (click)="saveOpSettingsToStorage()" placeholder="Contest"> 
         </ion-item>
 
         <ion-item lines="full">
           <ion-icon slot="start" name="location"></ion-icon>
-          Locator
-          <input type="text" slot="end" [(ngModel)]="settings.opData.locator" (click)="saveOpSettingsToStorage()"> 
+          <input type="text" slot="end" [(ngModel)]="settings.opData.locator" (click)="saveOpSettingsToStorage()" placeholder="Locator"> 
         </ion-item>
 
         <ion-item lines="full">
           <ion-icon slot="start" name="options"></ion-icon>
-          Mode
+
           <ion-select slot="end" [(ngModel)]="settings.opData.mode" placeholder="select mode..." (click)="saveOpSettingsToStorage()">
             <ion-select-option value="PH">SSB</ion-select-option>
             <ion-select-option value="CW">CW</ion-select-option>
@@ -66,11 +62,11 @@
 
         <ion-item lines="full">
           <ion-icon slot="start" name="airplane"></ion-icon>
-          Time Offset &nbsp; &nbsp; &nbsp;
-          <ion-chip color="tertiary">
+<!--           <ion-chip color="tertiary" slot="end">
             <ion-label> {{settings.opData.timeOffset.text}} </ion-label>
-          </ion-chip>
-          <ion-button color="secondary" expand="full" size="default" shape="round" strong="true" slot="end" (click)="showTimeOffsetPicker()">Choose</ion-button>
+          </ion-chip> -->
+          <ion-text slot="end">Time Offset: &nbsp; </ion-text>
+          <ion-button color="secondary" expand="full" size="default" shape="round" strong="true" slot="end" (click)="showTimeOffsetPicker()">{{settings.opData.timeOffset.text}}</ion-button>
         </ion-item>
 
 <!--         <ion-item-divider>

@@ -33,7 +33,7 @@ export class GlobalSettings {
       locator: '',
       mode: '',
       timeOffset: {
-        text: '',
+        text: 'Choose...',
         value: 0
       }
     };
@@ -56,8 +56,7 @@ export class GlobalSettings {
         this.darkmode = false;
       }
 
-    }
-    catch (error) { 
+    } catch (error) {
       console.log(error);
     }
 
@@ -67,10 +66,9 @@ export class GlobalSettings {
 
         this.opData = result;
 
-      } 
+      }
 
-    }
-    catch (error) { 
+    } catch (error) {
       console.log(error);
     }
 
@@ -79,8 +77,7 @@ export class GlobalSettings {
   async saveToStorage(key: string, value: any) {
     try {
       this.settingsStorage.set(key, value);
-    }
-    catch (error) { 
+    } catch (error) {
       console.log(error);
     }
   }

@@ -6,7 +6,7 @@ input {
     padding: 10px;
     background-color:var(--ion-input-color);
     color: var(--ion-input-text-color);
-    //width: 97%;
+    width: 90%;
     margin:7px;
   }
 
@@ -21,6 +21,18 @@ input {
     font-style: italic;
   }
 
+  .halfwidth{
+    width: 80%;
+    margin: 0px;
+    padding: 0px;
+    vertical-align: middle;
+    position: relative;
+  }
+
   ion-button {
     margin:7px;
+  }
+
+  ion-chip {
+    margin: 7px;
   }
