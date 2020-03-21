@@ -112,8 +112,16 @@ export class Tab2Page {
 
   }
 
-  async loadQsos() {
-    
+  async loadQsos(index: number) {
+    try {
+      console.log(this.qsoHistory[index].qsoList);
+      this.settings.recentQsos = Object.assign([], this.qsoHistory[index].qsoList);
+      this.storage.set('qsos', this.settings.recentQsos);
+
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   async exportQsos(index: number) {
