@@ -7,11 +7,7 @@ import { IonRouterOutlet } from '@ionic/angular';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { ToastController } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { ThrowStmt } from '@angular/compiler';
 import { GlobalSettings } from './../globalsettings';
-
-
-
 
 @Component({
   selector: 'app-tab2',
@@ -23,6 +19,7 @@ export class Tab2Page {
   qsoStorage: Storage;
   qsoHistory: Array<any>;
   settings: GlobalSettings;
+  recentQsos: Array<any>;
 
   constructor(private storage: Storage, private alertControl: AlertController, public modalCtrl: ModalController,
               private routerOutlet: IonRouterOutlet, private clipboard: Clipboard, public toastController: ToastController,
@@ -56,7 +53,7 @@ export class Tab2Page {
     operator: '',
   };
 
-  async saveQsoDialog() {
+  async archiveQsoDialog() {
     const alert = await this.alertControl.create({
       header: 'Save QSOs',
       inputs: [
@@ -67,20 +64,14 @@ export class Tab2Page {
         }, ],
         buttons: [
           {
+            text: 'archive QSOs',
+            handler: (alertData) => {
+              this.archiveQsos(alertData.name);
+            }
+          },
+          {
             text: 'Cancel',
             role: 'cancel',
-          },
-          {
-            text: 'Save & keep recent QSOs',
-            handler: (alertData) => {
-              this.saveQsos(false, alertData.name);
-            }
-          },
-          {
-            text: 'Save & delete recent QSOs',
-            handler: (alertData) => {
-              this.saveQsos(true, alertData.name);
-            }
           }
         ]
       });
@@ -88,7 +79,7 @@ export class Tab2Page {
     await alert.present();
   }
 
-  async saveQsos(deleteRecentQsos: boolean, name: string) {
+  async archiveQsos(name: string) {
 
     try {
       const recentQsos = await this.storage.get('qsos');
@@ -101,12 +92,19 @@ export class Tab2Page {
 
       newEntry.qsoList = recentQsos;
       newEntry.name = name;
+
+      // generate timestamp
       const now = new Date();
       newEntry.timeSaved = now.getFullYear().toString() + '-' + (now.getMonth() + 1).toString().padStart(2, '0')
       + '-' + now.getDate().toString().padStart(2, '0');
 
+      // save QSOs to history
       this.qsoHistory.unshift(newEntry);
       this.qsoStorage.set('qsoHistory', this.qsoHistory);
+
+      // clear recent QSOs
+      this.settings.recentQsos = [];
+      this.storage.set('qsos', []);
 
     } catch (error) {
       console.log(error);
@@ -192,7 +190,6 @@ export class Tab2Page {
   }
 
   async copyToClipboard(index: number) {
-    // this.generateCabrillo(index);
     this.clipboard.copy(this.generateCabrillo(index));
     const toast = await this.toastController.create({
       message: 'Your log has been copied!',
@@ -204,7 +201,6 @@ export class Tab2Page {
   async socialShare(index: number) {
     const options = {
       message: this.generateCabrillo(index),
-      url: 'https://www.website.com/foo/#bar?a=b',
     };
 
     this.socialSharing.shareWithOptions(options);

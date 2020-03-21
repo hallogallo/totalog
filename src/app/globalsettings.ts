@@ -22,6 +22,8 @@ export class GlobalSettings {
     }
   };
 
+  recentQsos: Array<any>;
+
   constructor(private storage: Storage) {
 
     this.opData = {

@@ -64,7 +64,7 @@
       Recent QSOs
     </ion-list-header>
 
-    <ion-item *ngFor="let qso of qsos; let i = index">
+    <ion-item *ngFor="let qso of settings.recentQsos; let i = index">
       <ion-label>
         <h2>{{qso.time}} &nbsp; <strong>{{qso.call}}</strong> </h2>
       </ion-label>

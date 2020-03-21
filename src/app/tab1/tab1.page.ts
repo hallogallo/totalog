@@ -14,7 +14,6 @@ import { EditPopoverComponent } from '../edit-popover/edit-popover.component';
 
 export class Tab1Page {
 
-  qsos: Array<any>;
   darkmode: boolean;
   settings: GlobalSettings;
 
@@ -25,16 +24,16 @@ export class Tab1Page {
 
       if ((value != null) && (value !== undefined)) {
 
-        this.qsos = value;
+        this.settings.recentQsos = value;
 
       } else {
 
-        this.qsos = [];
+        this.settings.recentQsos = [];
       }
 
     }).catch((error) => {
       console.log(error);
-      this.qsos = [];
+      this.settings.recentQsos = [];
     });
 
 
@@ -73,8 +72,8 @@ export class Tab1Page {
     newQso.time = (now.getHours() - this.settings.opData.timeOffset.value).toString().padStart(2, '0')
     + ':' + now.getMinutes().toString().padStart(2, '0');
     newQso.date = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
-    this.qsos.unshift(newQso);
-    this.storage.set('qsos', this.qsos);
+    this.settings.recentQsos.unshift(newQso);
+    this.storage.set('qsos', this.settings.recentQsos);
 
     // clear inputs
     this.form.call = '';
@@ -87,14 +86,14 @@ export class Tab1Page {
 
   deleteQso(index: number) {
 
-    this.qsos.splice(index, 1);
-    this.storage.set('qsos', this.qsos);
+    this.settings.recentQsos.splice(index, 1);
+    this.storage.set('qsos', this.settings.recentQsos);
 
   }
 
   async showEditDialog(qsoNumber: number) {
 
-    const editedQso = Object.assign({}, this.qsos[qsoNumber]) ;
+    const editedQso = Object.assign({}, this.settings.recentQsos[qsoNumber]) ;
 
     const popover = await this.popoverController.create({
       component: EditPopoverComponent,
@@ -105,8 +104,8 @@ export class Tab1Page {
 
     popover.onDidDismiss().then(data => {
       if (data.data) { // flag is set by save button on popover
-        Object.assign(this.qsos[qsoNumber], editedQso);
-        this.storage.set('qsos', this.qsos);
+        Object.assign(this.settings[qsoNumber], editedQso);
+        this.storage.set('qsos', this.settings);
       }
     });
 
