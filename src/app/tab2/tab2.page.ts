@@ -113,15 +113,43 @@ export class Tab2Page {
   }
 
   async loadQsos(index: number) {
+
     try {
-      console.log(this.qsoHistory[index].qsoList);
-      this.settings.recentQsos = Object.assign([], this.qsoHistory[index].qsoList);
-      this.storage.set('qsos', this.settings.recentQsos);
+
+      if(this.settings.recentQsos.length >0) {
+
+      const alert = await this.alertControl.create({
+        header: 'Recent QSOs are not empty',
+        message: 'Are you sure? This will overwrite your recent QSO list.',
+          buttons: [
+            {
+              text: 'Yes',    
+              handler: async () => {
+                this.copyArchivedQsosToRecents(index);
+              }
+            },
+            {
+              text: 'No',
+              role: 'cancel'
+            }
+          ]
+        });
+
+        await alert.present();
+      } else {
+        this.copyArchivedQsosToRecents(index);
+      }
 
     } catch (error) {
       console.log(error);
     }
 
+  }
+
+  async copyArchivedQsosToRecents(index: number) {
+
+      this.settings.recentQsos = Object.assign([], this.qsoHistory[index].qsoList);
+      this.storage.set('qsos', this.settings.recentQsos);
   }
 
   async exportQsos(index: number) {
