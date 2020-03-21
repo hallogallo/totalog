@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { PopoverController } from '@ionic/angular';
 import { EditPopoverComponent } from '../edit-popover/edit-popover.component';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class Tab1Page {
   settings: GlobalSettings;
 
   constructor(private storage: Storage, private globalSettings: GlobalSettings,
-              private statusBar: StatusBar, public popoverController: PopoverController) {
+              private statusBar: StatusBar, public popoverController: PopoverController, public toastController: ToastController) {
 
     this.storage.get('qsos').then((value) => {
 
@@ -84,10 +85,29 @@ export class Tab1Page {
 
   }
 
-  deleteQso(index: number) {
+  async deleteQso(index: number) {
 
-    this.settings.recentQsos.splice(index, 1);
+    const deletedQso = this.settings.recentQsos.splice(index, 1);
     this.storage.set('qsos', this.settings.recentQsos);
+
+    const toast = await this.toastController.create({
+      message: 'QSO deleted',
+      buttons: [
+        {
+          side: 'end',
+          icon: 'arrow-undo',
+          text: 'Undo',
+          handler: () => {
+            this.settings.recentQsos.splice(index, 0, deletedQso[0]);
+            this.storage.set('qsos', this.settings.recentQsos);
+          }
+        }
+      ],
+      duration: 2000
+    });
+
+    toast.present();
+
 
   }
 
