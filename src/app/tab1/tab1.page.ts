@@ -43,7 +43,6 @@ export class Tab1Page {
 
       if (this.settings.darkmode === true) {
         document.body.classList.add('dark');
-        // this.statusBar.backgroundColorByName('black');
         this.statusBar.backgroundColorByHexString('#212121');
         this.statusBar.styleBlackOpaque();
 
