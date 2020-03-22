@@ -204,7 +204,7 @@ export class Tab2Page {
     const modal = await this.modalCtrl.create({
       component: QsoEditModalPage,
       componentProps: this.qsoHistory[index],
-      swipeToClose: true,
+      swipeToClose: false,
       presentingElement: this.routerOutlet.nativeEl
     });
 
