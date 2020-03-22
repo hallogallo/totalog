@@ -124,8 +124,8 @@ export class Tab1Page {
 
     popover.onDidDismiss().then(data => {
       if (data.data) { // flag is set by save button on popover
-        Object.assign(this.settings[qsoNumber], editedQso);
-        this.storage.set('qsos', this.settings);
+        Object.assign(this.settings.recentQsos[qsoNumber], editedQso);
+        this.storage.set('qsos', this.settings.recentQsos);
       }
     });
 
