@@ -6,8 +6,9 @@ input {
     padding: 10px;
     background-color:var(--ion-input-color);
     color: var(--ion-input-text-color);
-    width: 90%;
+    width: 100%;
     margin:7px;
+    //text-align: right;
   }
 
   textarea:focus, input:focus{

@@ -29,7 +29,7 @@
         </ion-item-divider>
 
         <ion-item lines="full">
-          <ion-icon slot="start" name="information-circle"></ion-icon>
+          <ion-icon slot="start" name="call"></ion-icon>
           <input type="text" slot="end" [(ngModel)]="settings.opData.callsign" (click)="saveOpSettingsToStorage()" placeholder="Callsign"> 
         </ion-item>
 
@@ -49,7 +49,7 @@
         </ion-item>
 
         <ion-item lines="full">
-          <ion-icon slot="start" name="options"></ion-icon>
+          <ion-icon slot="start" name="radio"></ion-icon>
 
           <ion-select slot="end" [(ngModel)]="settings.opData.mode" placeholder="select mode..." (click)="saveOpSettingsToStorage()">
             <ion-select-option value="PH">SSB</ion-select-option>

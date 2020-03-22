@@ -55,7 +55,7 @@ export class Tab2Page {
 
   async archiveQsoDialog() {
     const alert = await this.alertControl.create({
-      header: 'Save QSOs',
+      header: 'Archive recent QSOs',
       inputs: [
         {
           name: 'name',
@@ -64,14 +64,14 @@ export class Tab2Page {
         }, ],
         buttons: [
           {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
             text: 'archive QSOs',
             handler: (alertData) => {
               this.archiveQsos(alertData.name);
             }
-          },
-          {
-            text: 'Cancel',
-            role: 'cancel',
           }
         ]
       });
@@ -106,6 +106,12 @@ export class Tab2Page {
       this.settings.recentQsos = [];
       this.storage.set('qsos', []);
 
+      const toast = await this.toastController.create({
+        message: 'Moved recent QSOs to archive',
+        duration: 2000
+      });
+      toast.present();
+
     } catch (error) {
       console.log(error);
     }
@@ -116,14 +122,14 @@ export class Tab2Page {
 
     try {
 
-      if(this.settings.recentQsos.length >0) {
+      if (this.settings.recentQsos.length > 0) {
 
       const alert = await this.alertControl.create({
         header: 'Recent QSOs are not empty',
         message: 'Are you sure? This will overwrite your recent QSO list.',
           buttons: [
             {
-              text: 'Yes',    
+              text: 'Yes',
               handler: async () => {
                 this.copyArchivedQsosToRecents(index);
               }
@@ -135,7 +141,8 @@ export class Tab2Page {
           ]
         });
 
-        await alert.present();
+      await alert.present();
+
       } else {
         this.copyArchivedQsosToRecents(index);
       }
@@ -150,6 +157,13 @@ export class Tab2Page {
 
       this.settings.recentQsos = Object.assign([], this.qsoHistory[index].qsoList);
       this.storage.set('qsos', this.settings.recentQsos);
+
+      const toast = await this.toastController.create({
+        message: 'QSOs loaded!',
+        duration: 2000
+      });
+      toast.present();
+
   }
 
   async exportQsos(index: number) {
@@ -157,6 +171,10 @@ export class Tab2Page {
       header: 'Export QSOs',
       message: 'make sure you got the OP settings right',
       buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
         {
           text: 'Copy to clipboard',
           handler: (alertData) => {
@@ -174,11 +192,7 @@ export class Tab2Page {
           handler: (alertData) => {
 
           }
-        }, */
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        }
+        } */
       ]
       });
 
