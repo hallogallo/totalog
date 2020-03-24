@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
@@ -204,15 +205,15 @@ export class Tab2Page {
     const modal = await this.modalCtrl.create({
       component: QsoEditModalPage,
       componentProps: this.qsoHistory[index],
-      swipeToClose: false,
+      swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl
     });
 
-    const temp = await modal.present();
-    const { data } = await modal.onWillDismiss();
-    this.qsoHistory[index].qsoList = data;
-    await this.storage.set('qsoHistory', this.qsoHistory);
-    return temp;
+    await modal.present();
+
+    await modal.onWillDismiss().then(async () => {
+      await this.storage.set('qsoHistory', this.qsoHistory);
+    });
 
   }
 
