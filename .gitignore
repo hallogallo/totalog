@@ -30,7 +30,6 @@ npm-debug.log*
 /plugins
 /resources/android/icon
 /resources/android/splash
-/resources/android/xml
 /resources/ios
 /resources/windows
 /www
