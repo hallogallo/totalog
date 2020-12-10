@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, PopoverController } from '@ionic/angular'; 
-import { NgFormSelectorWarning } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-popover',
