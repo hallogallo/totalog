@@ -1,8 +1,8 @@
-  Simple FLOSS Ham Radio logging app for small contests and portable operation.
- 11 
- 12     Features include:
- 13     * logging QSOs
- 14     * edit logged QSOs afterwards
- 15     * archive and manage different QSO lists
- 16     * export and share QSO lists as cabrillo
- 17     * dark mode
+Simple FLOSS Ham Radio logging app for small contests and portable operation.
+
+Features include:
+* logging QSOs
+* edit logged QSOs afterwards
+* archive and manage different QSO lists
+* export and share QSO lists as cabrillo
+* dark mode

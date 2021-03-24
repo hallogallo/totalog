@@ -1,9 +1,8 @@
+Einfache FLOSS-App für Funkamateure für kleine Conteste und Portabelbetrieb.
 
- 11 Einfache FLOSS-App für Funkamateure für kleine Conteste und Portabelbetrieb.
-
- 12     Features:
- 13     * QSOs loggen
- 14     * geloggte QSOs im Nachhinein bearbeiten
- 15     * QSOs in mehreren Listen organisieren und archivieren
- 16     * QSOs können als Cabrillo-Format exportiert und geteilt werden
- 17     * Nachtmodus (dark mode)
+Features:
+* QSOs loggen
+* geloggte QSOs im Nachhinein bearbeiten
+* QSOs in mehreren Listen organisieren und archivieren
+* QSOs können als Cabrillo-Format exportiert und geteilt werden
+* Nachtmodus (dark mode)
